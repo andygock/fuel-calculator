@@ -38,12 +38,19 @@ const updateOutputs = () => {
   if (!isNaN(outputs.fuelRequired)) {
     // round to 1 decimal point
     result.innerText = outputs.fuelRequired.toFixed(1);
-    result.classList.remove('error')
+    result.classList.remove("error");
   } else {
     // probably an error occured, fuelRequired is likely a string "ERR"
     result.innerText = outputs.fuelRequired;
-    result.classList.add('error')
+    result.classList.add("error");
   }
+
+  // calculate laptime in MM:SS
+  const { lapTime } = inputs; // user input lap time in seconds
+  const minutes = Math.floor(parseFloat(lapTime) / 60);
+  const seconds = lapTime - minutes * 60;
+  const formattedTime = minutes + ":" + seconds.toFixed(0).padStart(2,'0');
+  document.getElementById("lapTimeFormatted").innerHTML = formattedTime;
 };
 
 window.addEventListener("load", () => {
