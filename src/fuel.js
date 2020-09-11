@@ -1,5 +1,5 @@
 const inputs = {};
-const outputs = { fuelRequired: 0 };
+const outputs = { fuelRequired: 0, lapCount: 0, formattedTime: "0:00" };
 
 const inputNames = ["lapTime", "fuelRate", "raceTime"];
 
@@ -28,9 +28,14 @@ const calcFuelRequired = () => {
   }
 
   // calculate fuel required
-  const laps = (raceTime * 60) / lapTime;
-  const fuelRequired = laps * fuelRate;
+  outputs.lapCount = (raceTime * 60) / lapTime;
+  const fuelRequired = outputs.lapCount * fuelRate;
   outputs.fuelRequired = fuelRequired;
+
+  // calculate laptime in MM:SS
+  const minutes = Math.floor(parseFloat(lapTime) / 60);
+  const seconds = lapTime - minutes * 60;
+  outputs.formattedTime = minutes + ":" + seconds.toFixed(0).padStart(2, "0");
 };
 
 const updateOutputs = () => {
@@ -45,12 +50,9 @@ const updateOutputs = () => {
     result.classList.add("error");
   }
 
-  // calculate laptime in MM:SS
-  const { lapTime } = inputs; // user input lap time in seconds
-  const minutes = Math.floor(parseFloat(lapTime) / 60);
-  const seconds = lapTime - minutes * 60;
-  const formattedTime = minutes + ":" + seconds.toFixed(0).padStart(2,'0');
-  document.getElementById("lapTimeFormatted").innerHTML = formattedTime;
+  // update other output params
+  document.getElementById("lapTimeFormatted").innerText = outputs.formattedTime;
+  document.getElementById("lapCount").innerText = outputs.lapCount.toFixed(1);
 };
 
 window.addEventListener("load", () => {
