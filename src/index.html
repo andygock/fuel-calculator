@@ -14,9 +14,9 @@
   <link rel="stylesheet" href="style.scss" />
   <body>
     <div class="container">
+      <h2>How much fuel?</h2>
       <div class="inputs">
         <div>
-          <label for="lapTime">Lap Time (s)</label>
           <input
             id="lapTime"
             name="lapTime"
@@ -24,10 +24,12 @@
             step="1"
             value="120"
           />
+          <label for="lapTime"
+            >Lap Time (s) (<span class="lapTimeFormatted">0:00</span>)</label
+          >
         </div>
 
         <div>
-          <label for="fuelRate">Fuel Rate (L/lap)</label>
           <input
             id="fuelRate"
             name="fuelRate"
@@ -35,10 +37,10 @@
             step="0.01"
             value="2.0"
           />
+          <label for="fuelRate">Fuel Rate (L/lap)</label>
         </div>
 
         <div>
-          <label for="raceTime">Race Length (min)</label>
           <input
             id="raceTime"
             name="raceTime"
@@ -46,6 +48,7 @@
             step="1"
             value="60"
           />
+          <label for="raceTime">Race Length (min)</label>
         </div>
       </div>
 
@@ -54,7 +57,10 @@
           <span class="label">Fuel Required:</span>
           <span class="output"><span id="fuelRequired">0</span> L</span>
         </div>
-        <p><span id="lapCount">0</span> laps at <span id="lapTimeFormatted">0:00</span></p>
+        <p>
+          <span id="lapCount">0</span> laps at
+          <span class="lapTimeFormatted">0:00</span>
+        </p>
       </div>
     </div>
 
