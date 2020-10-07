@@ -51,7 +51,9 @@ const updateOutputs = () => {
   }
 
   // update other output params
-  document.getElementById("lapTimeFormatted").innerText = outputs.formattedTime;
+  [...document.getElementsByClassName("lapTimeFormatted")].forEach(el => {
+    el.innerText = outputs.formattedTime;
+  })
   document.getElementById("lapCount").innerText = outputs.lapCount.toFixed(1);
 };
 
