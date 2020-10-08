@@ -1,5 +1,11 @@
 html {
   font-size: 16px;
+  display: flex;
+  justify-content: center;
+}
+
+.container {
+  max-width: 500px;
 }
 
 body,
@@ -22,6 +28,7 @@ input {
   width: 5rem;
   padding: 0.5rem;
   background-color: white;
+  border: solid 1px #ccc;
 }
 
 .inputs > div {
@@ -44,4 +51,17 @@ h2 {
   a {
     color: #999;
   }
+}
+
+// remove spin box on input elements with type type 'number'
+// ref: https://stackoverflow.com/questions/3790935/can-i-hide-the-html5-number-input-s-spin-box
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  /* display: none; <- Crashes Chrome on hover */
+  -webkit-appearance: none;
+  margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+}
+
+input[type="number"] {
+  -moz-appearance: textfield; /* Firefox */
 }
