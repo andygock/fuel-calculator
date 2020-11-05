@@ -51,6 +51,7 @@ h2 {
   a {
     color: #999;
   }
+  margin-top: 1rem;
 }
 
 // remove spin box on input elements with type type 'number'
@@ -64,4 +65,15 @@ input::-webkit-inner-spin-button {
 
 input[type="number"] {
   -moz-appearance: textfield; /* Firefox */
+}
+
+.presets {
+  text-align: center;
+  .preset {
+    border: solid 1px #999;
+    padding: 0.5rem;
+    margin: 0.5rem 0.1rem;
+    background-color: white;
+    cursor: pointer;
+  }
 }

@@ -45,16 +45,35 @@ window.addEventListener("load", () => {
     const inputElement = document.getElementById(inputName);
     inputs[inputName] = parseFloat(inputElement.value, 10);
 
-    // immediately update on change
-    inputElement.addEventListener("change", (e) => {
+    // handler to read calculate outputs
+    const changeHandler = (e) => {
       inputs[inputName] = parseFloat(e.target.value);
       calcFuelRequired();
       updateOutputs();
+    };
+
+    // immediately update on any type of input change
+    const events = ["change", "keyup"];
+    events.forEach((event) => {
+      inputElement.addEventListener(event, (e) => {
+        changeHandler(e);
+      });
     });
 
     // select all input value when user clicks inside
     inputElement.addEventListener("focus", (e) => {
       e.target.select();
+    });
+  });
+
+  // add event listeners for presets
+  const presets = [...document.getElementsByClassName("preset")];
+  presets.forEach((preset) => {
+    preset.addEventListener("click", (e) => {
+      // user clicks preset button
+      const presetName = preset.innerText;
+
+      console.log(presetName);
     });
   });
 
