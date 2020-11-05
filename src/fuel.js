@@ -71,9 +71,10 @@ window.addEventListener("load", () => {
   presets.forEach((preset) => {
     preset.addEventListener("click", (e) => {
       // user clicks preset button
+      alert("Presets yet implemented yet");
+      return;
       const presetName = preset.innerText;
-
-      console.log(presetName);
+      console.log("Preset " + presetName);
     });
   });
 
