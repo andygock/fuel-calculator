@@ -3,23 +3,6 @@ const outputs = { fuelRequired: 0, lapCount: 0, formattedTime: "0:00" };
 
 const inputNames = ["lapTime", "fuelRate", "raceTime"];
 
-inputNames.forEach((inputName) => {
-  const inputElement = document.getElementById(inputName);
-  inputs[inputName] = parseFloat(inputElement.value, 10);
-
-  // immediately update on change
-  inputElement.addEventListener("change", (e) => {
-    inputs[inputName] = parseFloat(e.target.value);
-    calcFuelRequired();
-    updateOutputs();
-  });
-
-  // select all input value when user clicks inside
-  inputElement.addEventListener("focus", (e) => {
-    e.target.select();
-  });
-});
-
 const calcFuelRequired = () => {
   const { lapTime, fuelRate, raceTime } = inputs;
   if (isNaN(lapTime) || isNaN(fuelRate) || isNaN(raceTime)) {
@@ -51,13 +34,30 @@ const updateOutputs = () => {
   }
 
   // update other output params
-  [...document.getElementsByClassName("lapTimeFormatted")].forEach(el => {
+  [...document.getElementsByClassName("lapTimeFormatted")].forEach((el) => {
     el.innerText = outputs.formattedTime;
-  })
+  });
   document.getElementById("lapCount").innerText = outputs.lapCount.toFixed(1);
 };
 
 window.addEventListener("load", () => {
+  inputNames.forEach((inputName) => {
+    const inputElement = document.getElementById(inputName);
+    inputs[inputName] = parseFloat(inputElement.value, 10);
+
+    // immediately update on change
+    inputElement.addEventListener("change", (e) => {
+      inputs[inputName] = parseFloat(e.target.value);
+      calcFuelRequired();
+      updateOutputs();
+    });
+
+    // select all input value when user clicks inside
+    inputElement.addEventListener("focus", (e) => {
+      e.target.select();
+    });
+  });
+
   // perform calculation on first load
   calcFuelRequired();
   updateOutputs();
