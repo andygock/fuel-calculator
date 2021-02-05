@@ -40,23 +40,24 @@ const updateOutputs = () => {
   document.getElementById("lapCount").innerText = outputs.lapCount.toFixed(1);
 };
 
+// handler to read calculate outputs
+const changeHandler = (name, value) => {
+  inputs[name] = parseFloat(value);
+  calcFuelRequired();
+  updateOutputs();
+};
+
 window.addEventListener("load", () => {
   inputNames.forEach((inputName) => {
+    // initially, set input var as the element's default value
     const inputElement = document.getElementById(inputName);
     inputs[inputName] = parseFloat(inputElement.value, 10);
-
-    // handler to read calculate outputs
-    const changeHandler = (e) => {
-      inputs[inputName] = parseFloat(e.target.value);
-      calcFuelRequired();
-      updateOutputs();
-    };
 
     // immediately update on any type of input change
     const events = ["change", "keyup"];
     events.forEach((event) => {
       inputElement.addEventListener(event, (e) => {
-        changeHandler(e);
+        changeHandler(inputName, e.target.value);
       });
     });
 
