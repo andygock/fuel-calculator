@@ -53,6 +53,8 @@ window.addEventListener("load", () => {
     const inputElement = document.getElementById(inputName);
     inputs[inputName] = parseFloat(inputElement.value, 10);
 
+    // update: change input values to locally stored values
+
     // immediately update on any type of input change
     const events = ["change", "keyup"];
     events.forEach((event) => {
@@ -67,13 +69,16 @@ window.addEventListener("load", () => {
     });
   });
 
+  // note: presets are not implemented, likely never will be
   // add event listeners for presets
   const presets = [...document.getElementsByClassName("preset")];
   presets.forEach((preset) => {
     preset.addEventListener("click", (e) => {
       // user clicks preset button
+
       alert("Presets yet implemented yet");
       return;
+
       const presetName = preset.innerText;
       console.log("Preset " + presetName);
     });
