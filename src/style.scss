@@ -67,18 +67,6 @@ input[type="number"] {
   -moz-appearance: textfield; /* Firefox */
 }
 
-.presets {
-  display: none;
-  text-align: center;
-  .preset {
-    border: solid 1px #999;
-    padding: 0.5rem;
-    margin: 0.5rem 0.1rem;
-    background-color: white;
-    cursor: pointer;
-  }
-}
-
 .save {
   text-align: center;
 }

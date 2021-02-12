@@ -101,18 +101,6 @@ window.addEventListener("load", () => {
     localStorage.fuel = JSON.stringify(inputs);
   }
 
-  // note: presets are not implemented, likely never will be
-  // add event listeners for presets
-  const presets = [...document.getElementsByClassName("preset")];
-  presets.forEach((preset) => {
-    preset.addEventListener("click", (e) => {
-      alert("Presets yet implemented yet");
-      return;
-      // const presetName = preset.innerText;
-      // console.log("Preset " + presetName);
-    });
-  });
-
   // perform calculation on first load
   calcFuelRequired();
   updateOutputs();
