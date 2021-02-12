@@ -53,8 +53,6 @@ window.addEventListener("load", () => {
     const inputElement = document.getElementById(inputName);
     inputs[inputName] = parseFloat(inputElement.value, 10);
 
-    // update: change input values to locally stored values
-
     // immediately update on any type of input change
     const events = ["change", "keyup"];
     events.forEach((event) => {
@@ -69,22 +67,60 @@ window.addEventListener("load", () => {
     });
   });
 
+  // load inputs from stored values, if they exist
+  localStorage = window.localStorage;
+  const savedInputsJSON = localStorage?.fuel;
+
+  try {
+    const savedInputs = JSON.parse(savedInputsJSON);
+    // console.log("localStorage", savedInputs);
+
+    // if any values are null or undefined, reset the localStorage saved values
+    if (
+      Object.values(savedInputs).filter(
+        (val) => val === null || val === undefined
+      ).length
+    ) {
+      // save current input values to local storage, these should be valid
+      localStorage.fuel = JSON.stringify(inputs);
+    }
+
+    // update inputs with the saved values
+    Object.keys(savedInputs).forEach((inputName) => {
+      const inputElement = document.getElementById(inputName);
+      if (inputElement) {
+        // console.log(inputElement, savedInputs[inputName]);
+        inputElement.value = savedInputs[inputName].toString();
+        inputs[inputName] = savedInputs[inputName];
+      }
+    });
+  } catch (err) {
+    // no data saved, or saved data is invalid - reset it
+    console.log("Resetting local storage values");
+    console.log(err);
+    localStorage.fuel = JSON.stringify(inputs);
+  }
+
   // note: presets are not implemented, likely never will be
   // add event listeners for presets
   const presets = [...document.getElementsByClassName("preset")];
   presets.forEach((preset) => {
     preset.addEventListener("click", (e) => {
-      // user clicks preset button
-
       alert("Presets yet implemented yet");
       return;
-
-      const presetName = preset.innerText;
-      console.log("Preset " + presetName);
+      // const presetName = preset.innerText;
+      // console.log("Preset " + presetName);
     });
   });
 
   // perform calculation on first load
   calcFuelRequired();
   updateOutputs();
+
+  // handle clicking of save button
+  const saveElement = document.getElementById("save");
+  saveElement.addEventListener("click", () => {
+    // save all input values to local storage
+    localStorage.fuel = JSON.stringify(inputs);
+  });
 });
